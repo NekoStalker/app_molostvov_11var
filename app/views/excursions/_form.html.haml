@@ -1,0 +1,22 @@
+= form_for @excursion do |f|
+  - if @excursion.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@excursion.errors.count, "error")} prohibited this excursion from being saved:"
+      %ul
+        - @excursion.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :ename
+    = f.text_field :ename
+  .field
+    = f.label :city
+    = f.text_field :city_id
+  .field
+    = f.label :edesc
+    = f.text_area :edesc
+  .field
+    = f.label :eprice
+    = f.number_field :eprice
+  .actions
+    = f.submit nil, class: 'btn btn-primary'

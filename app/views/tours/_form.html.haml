@@ -1,0 +1,25 @@
+= form_for @tour do |f|
+  - if @tour.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@tour.errors.count, "error")} prohibited this tour from being saved:"
+      %ul
+        - @tour.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :route
+    = f.text_field :route_id
+  .field
+    = f.label :tdate
+    = f.date_select :tdate
+  .field
+    = f.label :days
+    = f.number_field :days
+  .field
+    = f.label :payment
+    = f.number_field :payment
+  .field
+    = f.label :tdesc
+    = f.text_area :tdesc
+  .actions
+    = f.submit nil, class: 'btn btn-primary'

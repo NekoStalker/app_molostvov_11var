@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ename: MyString
+  city_id: 
+  edesc: MyText
+  eprice: 1
+
+two:
+  ename: MyString
+  city_id: 
+  edesc: MyText
+  eprice: 1

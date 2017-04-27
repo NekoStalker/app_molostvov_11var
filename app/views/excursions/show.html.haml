@@ -1,0 +1,15 @@
+%h1= t('app.excursions.show')
+
+%dl
+  %dt= Excursion.human_attribute_name(:ename)
+  %dd= @excursion.ename
+  %dt= Excursion.human_attribute_name(:city)
+  %dd= @excursion.city.cname
+  %dt= Excursion.human_attribute_name(:edesc)
+  %dd= @excursion.edesc
+  %dt= Excursion.human_attribute_name(:eprice)
+  %dd= @excursion.eprice
+
+= link_to 'Редактировать', edit_excursion_path(@excursion)
+\|
+= link_to 'Назад', excursions_path

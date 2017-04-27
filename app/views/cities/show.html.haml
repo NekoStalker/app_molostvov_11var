@@ -1,0 +1,9 @@
+%h1= t('app.cities.show')
+
+%dl
+  %dt= City.human_attribute_name(:cname)
+  %dd= @city.cname
+
+= link_to 'Редактировать', edit_city_path(@city)
+\|
+= link_to 'Назад', cities_path

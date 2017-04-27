@@ -1,0 +1,15 @@
+%h1= t('app.routes.show')
+
+%dl
+  %dt= Route.human_attribute_name(:rname)
+  %dd= @route.rname
+  %dt= Route.human_attribute_name(:city)
+  %dd= @route.city.cname
+  %dt= Route.human_attribute_name(:rdesc)
+  %dd= @route.rdesc
+  %dt= Route.human_attribute_name(:rprice)
+  %dd= @route.rprice
+
+= link_to 'Редактировать', edit_route_path(@route)
+\|
+= link_to 'Назад', routes_path

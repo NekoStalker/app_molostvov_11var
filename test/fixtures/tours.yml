@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  route_id: 
+  tdate: 2017-04-24
+  days: 1
+  payment: 1
+  tdesc: MyText
+
+two:
+  route_id: 
+  tdate: 2017-04-24
+  days: 1
+  payment: 1
+  tdesc: MyText

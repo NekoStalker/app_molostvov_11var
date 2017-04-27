@@ -1,0 +1,17 @@
+%h1= t('app.tours.show')
+
+%dl
+  %dt= Tour.human_attribute_name(:route)
+  %dd= @tour.route.rname
+  %dt= Tour.human_attribute_name(:tdate)
+  %dd= @tour.tdate
+  %dt= Tour.human_attribute_name(:days)
+  %dd= @tour.days
+  %dt= Tour.human_attribute_name(:payment)
+  %dd= @tour.payment
+  %dt= Tour.human_attribute_name(:tdesc)
+  %dd= @tour.tdesc
+
+= link_to 'Редактировать', edit_tour_path(@tour)
+\|
+= link_to 'Назад', tours_path

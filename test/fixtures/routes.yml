@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  rname: MyString
+  city_id: 
+  rdesc: MyText
+  rprice: 1
+
+two:
+  rname: MyString
+  city_id: 
+  rdesc: MyText
+  rprice: 1
