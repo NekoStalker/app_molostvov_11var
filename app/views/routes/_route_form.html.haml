@@ -1,0 +1,49 @@
+.col-md-6
+  %div{class: 'panel panel-'+ (i==1 ? 'success' : 'info')}
+    .panel-heading
+      -if i==1
+        Редактирование маршрута
+      -else
+        Создать новый маршрут
+      .clearfix
+    .panel-body
+      .row
+        .col-md-6
+          .form-group
+            = fr.label :rname
+            = fr.text_field :rname, class: 'form-control'
+            = fr.error_messages_for(:rname)
+        .col-md-6
+          .form-group
+            = fr.label :rprice
+            = fr.number_field :rprice, class: 'form-control'
+            = fr.error_messages_for(:rprice)
+        .col-md-6
+          .form-group
+            = fr.label :rdesc
+            = fr.text_area :rdesc, class: 'form-control'
+            = fr.error_messages_for(:rdesc)
+        .col-md-6
+          .form-group
+            = fr.label :city
+            - if i==1
+              = fr.select :city_id, City.all.map{|c| [c.cname, c.id]},
+                {}, {class: 'form-control'}
+            - else
+              = fr.select :city_id, City.all.map{|c| [c.cname, c.id]},
+                {:include_blank => 'Выбрать город'}, {class: 'form-control'}
+            = fr.error_messages_for(:city_id)
+        - if i==1  
+          = fr.fields_for(:city) do |fc|
+            .col-md-6
+              .form-group
+                = fc.label :cname, "Редактирование названия города"
+                = fc.text_field :cname, class: 'form-control'
+                = fc.error_messages_for(:cname)
+        -#- else
+          = fr.fields_for :city, City.new do |fc|
+            .col-md-6
+              .form-group
+                = fc.label :cname, "Создание нового города"
+                = fc.text_field :cname, class: 'form-control'
+                = fc.error_messages_for(:cname)

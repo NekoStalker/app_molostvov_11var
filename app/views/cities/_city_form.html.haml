@@ -1,0 +1,15 @@
+.col-md-6
+  %div{class: 'panel panel-'+ (i==1 ? 'success' : 'info')}
+    .panel-heading
+      -if i==1
+        Редактирование города
+      -else
+        Новый город
+      .clearfix
+    .panel-body
+      .row
+        .col-md-6
+          .form-group
+            = fr.label :cname
+            = fr.text_field :cname, class: 'form-control'
+            = fr.error_messages_for(:cname)
