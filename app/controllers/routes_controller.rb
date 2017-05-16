@@ -28,7 +28,7 @@ class RoutesController < ApplicationController
 
     respond_to do |format|
       if @route.save
-        format.html { redirect_to @route, notice: 'Route was successfully created.' }
+        format.html { redirect_to @route, notice: 'Маршрут создан.' }
         format.json { render :show, status: :created, location: @route }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class RoutesController < ApplicationController
   def update
     respond_to do |format|
       if @route.update(route_params)
-        format.html { redirect_to @route, notice: 'Route was successfully updated.' }
+        format.html { redirect_to @route, notice: 'Маршрут изменен.' }
         format.json { render :show, status: :ok, location: @route }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class RoutesController < ApplicationController
   def destroy
     @route.destroy
     respond_to do |format|
-      format.html { redirect_to routes_url, notice: 'Route was successfully destroyed.' }
+      format.html { redirect_to routes_url, notice: 'Маршрут удален.' }
       format.json { head :no_content }
     end
   end

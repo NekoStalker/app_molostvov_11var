@@ -1,33 +1,43 @@
-%h1= t('app.excursions.index')
+=breadcrumb_tag do
+  %li
+    Экскурсионные туры
+  %li.active
+    Экскурсии
 
-%table.table.table-hover.table-striped.center
-  %caption
-    .pull-right
-      = link_to t('app.excursions.new-button'), new_excursion_path, class: 'btn btn-primary'
-  %thead
-    %tr
-      %th= Excursion.human_attribute_name(:ename)
-      %th= Excursion.human_attribute_name(:city)
-      %th= Excursion.human_attribute_name(:edesc)
-      %th= Excursion.human_attribute_name(:eprice)
-      %th.p50
-      %th.p50
-      %th.p50
+.page-header
+  %h1= t('headers.excursions.index')
 
-  %tbody
-    - @excursions.each do |excursion|
+.table-responsive
+  %table.table.table-hover.table-striped.table-condensed
+    - if @current_role_user.try(:is_admin?)
+      %caption
+        = link_to new_excursion_path, class: 'btn btn-success' do
+          = fa_icon :plus
+          = t('buttons.new.excursion')
+    %thead
       %tr
-        %td= excursion.ename
-        %td= excursion.city.cname
-        %td= excursion.edesc
-        %td= excursion.eprice
-        %td
-          = link_to excursion, class: 'btn btn-success' do
-            = fa_icon :eye
-        %td
-          = link_to edit_excursion_path(excursion), class: 'btn btn-info' do
-            = fa_icon :edit
-        %td
-          = link_to excursion, :method => :delete, :data => { :confirm => t('helpers.sure') }, class: 'btn btn-danger' do
-            = fa_icon :times
-
+        %th= Excursion.human_attribute_name(:ename)
+        %th= Excursion.human_attribute_name(:city)
+        %th= Excursion.human_attribute_name(:edesc)
+        %th= Excursion.human_attribute_name(:eprice)
+        %th
+    %tbody
+      - @excursions.each do |excursion|
+        %tr
+          %td{:data => Excursion.human_attribute_name(:ename)}= excursion.ename
+          %td{:data => Excursion.human_attribute_name(:city)}= excursion.city.cname
+          %td{:data => Excursion.human_attribute_name(:edesc)}= excursion.edesc
+          %td{:data => Excursion.human_attribute_name(:eprice)}= excursion.eprice
+          %td.right
+            = link_to excursion, class: 'btn btn-warning' do
+              = fa_icon :eye
+              = t('buttons.show')
+            - if @current_role_user.try(:is_admin?)
+              = link_to edit_excursion_path(excursion), class: 'btn btn-info' do
+                = fa_icon :edit
+                = t('buttons.edit')
+              = link_to excursion, :method => :delete,
+                :data => { :confirm => t('buttons.confirm.excursion') },
+                class: 'btn btn-danger' do
+                = fa_icon :times
+                = t('buttons.destroy')

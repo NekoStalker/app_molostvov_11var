@@ -1,10 +1,10 @@
 =breadcrumb_tag do
-  %li.active
-    = @role.name
-  %li
-    = link_to 'Роли', roles_path
   %li
     Администрирование
+  %li
+    = link_to 'Роли', roles_path
+  %li.active
+    = @role.name
 
 %h1= @role.name
 
@@ -17,5 +17,3 @@
 
   %dt= Role.human_attribute_name(:full_info)
   %dd= @role.full_info
-
-

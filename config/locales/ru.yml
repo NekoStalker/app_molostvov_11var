@@ -4,47 +4,55 @@ ru:
     company:
       short_name: МПУ
       department: Кафедра
-    users:
-      index: Список пользователей
-      new-button: Новый пользователь 
-      edit: Редактирование пользователя
-      new: Создание пользователя
-    roles:
-      index: Список возможных ролей пользователей
-      new-button: Новая роль
-      edit: Редактирование роли
-      new: Создание роли
-    cities:
-      index: Cписок городов
-      new-button: Новый город
-      edit: Редактирование города
-      new: Создание города
-      show: Просмотр города
-    excursions:
-      index: Cписок экскурсий
-      new-button: Новая экскурсия
-      edit: Редактирование экскурсии
-      new: Создание экскурсии
-      show: Просмотр экскурсии
-    routes:
-      index: Cписок маршрутов
-      new-button: Новый маршрут
-      edit: Редактирование маршрута
-      new: Создание маршрута
-      show: Просмотр маршрута
-    tours:
-      index: Cписок туров
-      new-button: Новый тур
-      edit: Редактирование тура
-      new: Создание тура
-      show: Просмотр тура
   helpers:
     submit:
       create: Сохранить
       submit: Сохранить
       update: Сохранить
-    sure: Действительно удалить?      
-  
+  buttons:
+    edit: Редактировать
+    destroy: Удалить
+    show: Показать
+    confirm:
+      user: Действительно удалить пользователя?
+      role: Действительно удалить роль?
+      city: Действительно удалить город?
+      excursion: Действительно удалить экскурсию?
+      route: Действительно удалить маршрут?
+      tour: Действительно удалить тур?
+    new:
+      user: Новый пользователь
+      role: Новая роль
+      city: Новый город
+      excursion: Новая Экскурсия
+      route: Новый маршрут
+      tour: Новый тур
+  headers:
+    users:
+      index: Список пользователей
+      new: Новый пользователь
+      edit: Редактирование пользователя
+    roles:
+      index: Список возможных ролей пользователей
+      new: Новая роль
+      edit: Редактирование роли
+    cities:
+      index: Cписок городов
+      new: Новый город
+      edit: Редактирование города
+    excursions:
+      index: Cписок экскурсий
+      new: Новая экскурсия
+      edit: Редактирование экскурсии
+    routes:
+      index: Cписок маршрутов
+      new: Новый маршрут
+      edit: Редактирование маршрута
+    tours:
+      index: Cписок туров
+      new: Новый тур
+      edit: Редактирование тура
+      show: Просмотр тура
   views:
     pagination:
       first: ⇤
@@ -55,9 +63,14 @@ ru:
   activerecord:
     models:
       user: Пользователь
+      city: Город
+      excursion: Экскурсия
+      route: Маршрут
+      tour: Тур
     attributes:
       user:
         email: Пользовательское имя/электронная почта
+        birthday: Дата рождения
         password: Пароль
         password_confirmation: Подтверждение пароля
         reset_password_email_sent_at: Дата отправления письма для смены пароля
@@ -69,28 +82,31 @@ ru:
         name: Обозначение
         info: Краткое название
         full_info: Описание
+      # nested_start
+      role_user: &role_users
+      # nested_finish
+        role: Роль
+        role_id: Роль
+        data: Параметры
+      # nested_start
+      user/role_users:
+        <<: *role_users
+      # nested_finish
       city:
-        cname: Название
+        cname: Название города
       excursion:
-        ename: Название
+        ename: Название экскурсии
         city: Город
-        edesc: Описание
-        eprice: Стоимость
+        edesc: Описание экскурсии
+        eprice: Стоимость экскурсии
       route:
-        rname: Название
+        rname: Название маршрута
         city: Город отправления
-        rdesc: Описание
-        rprice: Стоимость
-      tour:
+        rdesc: Описание маршрута
+        rprice: Стоимость маршрута
+      tour: 
         route: Маршрут
         tdate: Дата отъезда
         days: Количество дней
         payment: Доп. взносы
-        tdesc: Описание
-    errors:
-      models:
-        person:
-          attributes:
-            snils:
-              check_sum: имеет неправильную контрольную сумму
-          
+        tdesc: Описание тура

@@ -1,5 +1,12 @@
-%h1= t('app.routes.new')
+=breadcrumb_tag do
+  %li
+    Экскурсионные туры
+  %li
+    = link_to 'Маршруты', routes_path
+  %li.active
+    = t('headers.routes.new')
+
+.page-header
+  %h1= t('headers.routes.new')
 
 = render 'form'
-
-= link_to 'Назад', routes_path

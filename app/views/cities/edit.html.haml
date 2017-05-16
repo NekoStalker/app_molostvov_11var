@@ -1,7 +1,14 @@
-%h1= t('app.cities.edit')
+=breadcrumb_tag do
+  %li
+    Экскурсионные туры
+  %li
+    = link_to 'Города', cities_path
+  %li
+    = link_to(@city.cname, @city)
+  %li.active
+    = t('headers.cities.edit')
+
+.page-header
+  %h1= t('headers.cities.edit')
 
 = render 'form'
-
-= link_to 'Просмотр', @city
-\|
-= link_to 'Назад', cities_path

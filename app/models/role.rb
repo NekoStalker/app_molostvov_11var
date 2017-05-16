@@ -1,5 +1,5 @@
 class Role < ActiveRecord::Base
-  has_many :role_users  
+  has_many :role_users, dependent: :destroy
   
   validates :name, presence: true, uniqueness: true
   validates :info, presence: true, uniqueness: true

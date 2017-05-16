@@ -1,9 +1,13 @@
-%h1= t('app.cities.show')
+=breadcrumb_tag do
+  %li
+    Экскурсионные туры
+  %li
+    = link_to 'Города', cities_path
+  %li.active
+    = @city.cname
+
+%h1= @city.cname
 
 %dl
   %dt= City.human_attribute_name(:cname)
   %dd= @city.cname
-
-= link_to 'Редактировать', edit_city_path(@city)
-\|
-= link_to 'Назад', cities_path

@@ -1,25 +1,46 @@
 = form_for @tour do |f|
-  - if @tour.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@tour.errors.count, "error")} prohibited this tour from being saved:"
-      %ul
-        - @tour.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :route
-    = f.text_field :route_id
-  .field
-    = f.label :tdate
-    = f.date_select :tdate
-  .field
-    = f.label :days
-    = f.number_field :days
-  .field
-    = f.label :payment
-    = f.number_field :payment
-  .field
-    = f.label :tdesc
-    = f.text_area :tdesc
-  .actions
+  = error_messages_for @tour
+  .row
+    .col-md-6
+      .form-group
+        = f.label :tdate
+        .input-group.date.datepicker
+          = f.text_field(:tdate, value: lnil(f.object.tdate), class: 'form-control')
+          %span.input-group-addon
+            %span.glyphicon.glyphicon-calendar
+        = f.error_messages_for(:tdate)
+    .col-md-6
+      .form-group
+        = f.label :days
+        = f.number_field :days, class: 'form-control'
+        = f.error_messages_for(:days)
+  .row
+    .col-md-6
+      .form-group
+        = f.label :payment
+        = f.number_field :payment, class: 'form-control'
+        = f.error_messages_for(:payment)
+    .col-md-6
+      .form-group
+        = f.label :tdesc
+        = f.text_area :tdesc, class: 'form-control'
+        = f.error_messages_for(:tdesc)
+  .row
+    .col-md-6
+      .form-group
+        = f.label :route
+        - if @tour.new_record?
+          = f.select :route_id, Route.all.map{|r| [r.rname, r.id]},
+            {:include_blank => 'Выбрать маршрут'}, {class: 'form-control'}
+        - else
+          = f.select :route_id, Route.all.map{|r| [r.rname, r.id]},
+            {}, {class: 'form-control'}
+        = f.error_messages_for(:route_id)
+  .row
+    - if @tour.present?
+      = f.fields_for(:route) do |fr|
+        = render('routes/route_form', fr: fr, i: 1)
+    - if @tour.new_record?
+      = link_to_add_route(f)
+  .form-actions.bottom10
     = f.submit nil, class: 'btn btn-primary'

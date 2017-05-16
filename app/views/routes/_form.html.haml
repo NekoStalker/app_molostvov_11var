@@ -11,12 +11,14 @@
     = f.text_field :rname
   .field
     = f.label :city
-    = f.text_field :city_id
+    = f.select(:city_id,
+      options_for_select(City.all.pluck('cname, id'), f.object.city_id),
+      {}, class: 'form-control')
   .field
     = f.label :rdesc
     = f.text_area :rdesc
   .field
     = f.label :rprice
     = f.number_field :rprice
-  .actions
+  .form-actions.bottom10
     = f.submit nil, class: 'btn btn-primary'

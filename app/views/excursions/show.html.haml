@@ -1,4 +1,12 @@
-%h1= t('app.excursions.show')
+=breadcrumb_tag do
+  %li
+    Экскурсионные туры
+  %li
+    = link_to 'Экскурсии', excursions_path
+  %li.active
+    = @excursion.ename
+
+%h1= @excursion.ename
 
 %dl
   %dt= Excursion.human_attribute_name(:ename)
@@ -10,6 +18,10 @@
   %dt= Excursion.human_attribute_name(:eprice)
   %dd= @excursion.eprice
 
-= link_to 'Редактировать', edit_excursion_path(@excursion)
-\|
-= link_to 'Назад', excursions_path
+- if @current_role_user.try(:is_admin?)
+  = link_to edit_excursion_path(@excursion), class: 'btn btn-info' do
+    = fa_icon :edit
+    = t('buttons.edit')
+  = link_to @excursion, :method => :delete, :data => { :confirm => t('buttons.confirm.excursion') }, class: 'btn btn-danger' do
+    = fa_icon :times
+    = t('buttons.destroy')

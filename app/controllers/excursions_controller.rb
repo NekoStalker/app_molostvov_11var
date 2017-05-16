@@ -25,10 +25,9 @@ class ExcursionsController < ApplicationController
   # POST /excursions.json
   def create
     @excursion = Excursion.new(excursion_params)
-
     respond_to do |format|
       if @excursion.save
-        format.html { redirect_to @excursion, notice: 'Excursion was successfully created.' }
+        format.html { redirect_to @excursion, notice: 'Экскурсия создана.' }
         format.json { render :show, status: :created, location: @excursion }
       else
         format.html { render :new }
@@ -40,9 +39,15 @@ class ExcursionsController < ApplicationController
   # PATCH/PUT /excursions/1
   # PATCH/PUT /excursions/1.json
   def update
+    if ((params[:excursion][:city_id]) != (params[:excursion][:city_attributes][:id]))
+      if(params[:excursion][:city_id].to_i > 0)
+        params[:excursion][:city_attributes].clear
+        @excursion.city = City.find_by_id(params[:excursion][:city_id])
+      end
+    end
     respond_to do |format|
       if @excursion.update(excursion_params)
-        format.html { redirect_to @excursion, notice: 'Excursion was successfully updated.' }
+        format.html { redirect_to @excursion, notice: 'Экскурсия изменена.' }
         format.json { render :show, status: :ok, location: @excursion }
       else
         format.html { render :edit }
@@ -56,7 +61,7 @@ class ExcursionsController < ApplicationController
   def destroy
     @excursion.destroy
     respond_to do |format|
-      format.html { redirect_to excursions_url, notice: 'Excursion was successfully destroyed.' }
+      format.html { redirect_to excursions_url, notice: 'Экскурсия удалена.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +74,15 @@ class ExcursionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def excursion_params
-      params.require(:excursion).permit(:ename, :city_id, :edesc, :eprice)
+      params.require(:excursion).permit(:ename, :city_id, :edesc, :eprice,
+      city_attributes: [:id, :_destroy, :cname])
+    end
+
+    def check_ctr_auth()
+      if @current_role_user.try(:is_admin?)
+        return true
+      else
+        return true if (action_name.to_sym == :index or action_name.to_sym == :show)
+      end
     end
 end

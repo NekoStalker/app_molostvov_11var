@@ -1,17 +1,35 @@
-%h1= t('app.tours.show')
+=breadcrumb_tag do
+  %li
+    Экскурсионные туры
+  %li
+    = link_to 'Туры', tours_path
+  %li.active
+    = t('headers.tours.show')
+
+%h1= t('headers.tours.show')
 
 %dl
   %dt= Tour.human_attribute_name(:route)
   %dd= @tour.route.rname
+  %dt= Route.human_attribute_name(:city)
+  %dd= @tour.route.city.cname
   %dt= Tour.human_attribute_name(:tdate)
   %dd= @tour.tdate
   %dt= Tour.human_attribute_name(:days)
   %dd= @tour.days
+  %dt= Route.human_attribute_name(:rprice)
+  %dd= @tour.route.rprice
   %dt= Tour.human_attribute_name(:payment)
   %dd= @tour.payment
   %dt= Tour.human_attribute_name(:tdesc)
   %dd= @tour.tdesc
+  %dt= Route.human_attribute_name(:rdesc)
+  %dd= @tour.route.rdesc
 
-= link_to 'Редактировать', edit_tour_path(@tour)
-\|
-= link_to 'Назад', tours_path
+- if @current_role_user.try(:is_admin?)
+  = link_to edit_tour_path(@tour), class: 'btn btn-info' do
+    = fa_icon :edit
+    = t('buttons.edit')
+  = link_to @tour, :method => :delete, :data => { :confirm => t('buttons.confirm.tour') }, class: 'btn btn-danger' do
+    = fa_icon :times
+    = t('buttons.destroy')

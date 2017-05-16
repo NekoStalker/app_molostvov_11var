@@ -1,4 +1,12 @@
-%h1= t('app.routes.show')
+=breadcrumb_tag do
+  %li
+    Экскурсионные туры
+  %li
+    = link_to 'Маршруты', routes_path
+  %li.active
+    = @route.rname
+
+%h1= @route.rname
 
 %dl
   %dt= Route.human_attribute_name(:rname)
@@ -9,7 +17,3 @@
   %dd= @route.rdesc
   %dt= Route.human_attribute_name(:rprice)
   %dd= @route.rprice
-
-= link_to 'Редактировать', edit_route_path(@route)
-\|
-= link_to 'Назад', routes_path
