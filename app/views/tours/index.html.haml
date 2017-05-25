@@ -9,8 +9,11 @@
 
 .table-responsive
   %table.table.table-hover.table-striped.table-condensed
-    - if @current_role_user.try(:is_admin?)
-      %caption
+    %caption
+      = link_to search_tours_path, class: 'btn btn-info' do
+        = fa_icon :search
+        = t('buttons.search.tour')
+      - if @current_role_user.try(:is_admin?)
         = link_to new_tour_path, class: 'btn btn-success' do
           = fa_icon :plus
           = t('buttons.new.tour')
@@ -19,7 +22,7 @@
         %th= Tour.human_attribute_name(:route)
         %th= Tour.human_attribute_name(:tdate)
         %th= Tour.human_attribute_name(:days)
-        %th  Стоимость тура
+        %th= Tour.human_attribute_name(:tprice) + '*'
         %th= Tour.human_attribute_name(:tdesc)
         %th
     %tbody
@@ -28,7 +31,7 @@
           %td{:data => Tour.human_attribute_name(:route)}= tour.route.rname
           %td{:data => Tour.human_attribute_name(:tdate)}= tour.tdate
           %td{:data => Tour.human_attribute_name(:days)}= tour.days
-          %td{:data => "Стоимость тура"}= tour.trprice
+          %td{:data => Tour.human_attribute_name(:tprice)}= tour.trprice
           %td{:data => Tour.human_attribute_name(:tdesc)}= tour.tdesc
           %td.right
             = link_to tour, class: 'btn btn-warning' do
@@ -43,3 +46,5 @@
               class: 'btn btn-danger' do
                 = fa_icon :times
                 = t('buttons.destroy')
+  %d
+    * Стоимость тура равна стоимости маршрута плюс дополнительные взносы

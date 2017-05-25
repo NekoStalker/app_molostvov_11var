@@ -1,0 +1,79 @@
+=breadcrumb_tag do
+  %li
+    Экскурсионные туры
+  %li
+    = link_to 'Туры', tours_path
+  %li.active
+    = t('headers.tours.search')
+
+.page-header
+  %h1= t('headers.tours.search')
+
+= form_tag search_tours_path, method: :post, remote: true do
+  .row
+    .col-md-6
+      .form-group
+        = label_tag 'search[city][cname]', t('search.cities.cname')
+        = select_tag 'search[city][cname]', options_for_select(City.all.map{|c| [c.cname, c.id]}),
+          {:include_blank => 'Выбрать город',class: 'form-control'}
+  .row
+    .col-md-6
+      .form-group
+        = label_tag 'search[route][rname]', t('search.routes.rname')
+        = select_tag 'search[route][rname]', options_for_select(Route.all.map{|r| [r.rname, r.id]}),
+          {:include_blank => 'Выбрать маршрут',class: 'form-control'}
+  .row
+    .col-md-6
+      .form-group
+        = label_tag 'search[tour][tdatef]', t('search.tours.tdate')
+        .input-group.date.datepicker
+          = text_field_tag 'search[tour][tdatef]', nil, class: 'form-control'
+          %span.input-group-addon
+            %span.glyphicon.glyphicon-calendar
+    .col-md-6
+      .form-group
+        = label_tag 'search[tour][tdatet]', t('search.tours.to')
+        .input-group.date.datepicker
+          = text_field_tag 'search[tour][tdatet]', nil, class: 'form-control'
+          %span.input-group-addon
+            %span.glyphicon.glyphicon-calendar
+  .row
+    .col-md-6
+      .form-group
+        = label_tag 'search[tour][daysf]', t('search.tours.days')
+        = number_field_tag 'search[tour][daysf]', nil, class: 'form-control'
+    .col-md-6
+      .form-group
+        = label_tag 'search[tour][dayst]', t('search.tours.to')
+        = number_field_tag 'search[tour][dayst]', nil, class: 'form-control'
+  .row
+    .col-md-6
+      .form-group
+        = label_tag 'search[route][rpricef]', t('search.routes.rprice')
+        = number_field_tag 'search[route][rpricef]', nil, class: 'form-control'
+    .col-md-6
+      .form-group
+        = label_tag 'search[route][rpricet]', t('search.tours.to')
+        = number_field_tag 'search[route][rpricet]', nil, class: 'form-control'
+  .row
+    .col-md-6
+      .form-group
+        = label_tag 'search[tour][paymentf]', t('search.tours.payment')
+        = number_field_tag 'search[tour][paymentf]', nil, class: 'form-control'
+    .col-md-6
+      .form-group
+        = label_tag 'search[tour][paymentt]', t('search.tours.to')
+        = number_field_tag 'search[tour][paymentt]', nil, class: 'form-control'
+  .row
+    .col-md-6
+      .form-group
+        = label_tag 'search[tour][tdesc]', t('search.tours.tdesc')
+        = text_area_tag 'search[tour][tdesc]', nil, class: 'form-control'
+  .row
+    .col-md-6
+      .form-group
+        = label_tag 'search[route][rdesc]', t('search.routes.rdesc')
+        = text_area_tag 'search[route][rdesc]', nil, class: 'form-control'
+  .form-actions.bottom10
+    = submit_tag 'Поиск', class: 'btn btn-primary'
+#search_res

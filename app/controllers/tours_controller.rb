@@ -1,5 +1,13 @@
 class ToursController < ApplicationController
-  before_action :set_tour, only: [:show, :edit, :update, :destroy, :change_route]
+  before_action :set_tour, only: [:show, :edit, :update, :destroy]
+
+  def search
+    if params['search'].present?
+      @tours = Tour.search(params['search'])
+    else
+      @tours = []
+    end
+  end
 
   # GET /tours
   # GET /tours.json
@@ -89,7 +97,7 @@ class ToursController < ApplicationController
       if @current_role_user.try(:is_admin?)
         return true
       else
-        return true if (action_name.to_sym == :index or action_name.to_sym == :show)
+        return true if (action_name.to_sym == :index or action_name.to_sym == :show or action_name.to_sym == :search)
       end
     end
 end

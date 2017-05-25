@@ -1,0 +1,5 @@
+<% if @tours.present? %>
+  $("#search_res").html("<%= j render 'search_res' %> ")
+<% else %>
+  $("#search_res").html("<h3>Туров не найдено</h3>")
+<% end %>

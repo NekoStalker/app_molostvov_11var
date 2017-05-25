@@ -27,6 +27,8 @@ ru:
       excursion: Новая Экскурсия
       route: Новый маршрут
       tour: Новый тур
+    search:
+      tour: Поиск туров
   headers:
     users:
       index: Список пользователей
@@ -53,6 +55,20 @@ ru:
       new: Новый тур
       edit: Редактирование тура
       show: Просмотр тура
+      search: Поиск туров
+  search:
+    tours:
+      days: Количество дней с
+      tdate: Дата отправления с
+      payment: Доп. взносы c
+      tdesc: Описание тура
+      to: по
+    routes:
+      rname: Название маршрута
+      rprice: Стоимость маршрута с
+      rdesc: Описание маршрута
+    cities:
+      cname: Город отправления
   views:
     pagination:
       first: ⇤
@@ -110,3 +126,4 @@ ru:
         days: Количество дней
         payment: Доп. взносы
         tdesc: Описание тура
+        tprice: Стоимость тура

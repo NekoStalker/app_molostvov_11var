@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :tours
+  resources :tours do
+    collection do
+      get :search
+      post :search
+    end
+  end
   resources :routes
   resources :excursions
   resources :cities

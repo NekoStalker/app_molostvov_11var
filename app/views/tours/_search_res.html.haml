@@ -1,0 +1,36 @@
+- if @tours.present?
+  .page-header
+    %h2 Найденные туры
+  .table-responsive
+    %table.table.table-hover.table-striped.table-condensed
+      %thead
+        %tr
+          %th= Tour.human_attribute_name(:route)
+          %th= Tour.human_attribute_name(:tdate)
+          %th= Tour.human_attribute_name(:days)
+          %th= Tour.human_attribute_name(:tprice) + '*'
+          %th= Tour.human_attribute_name(:tdesc)
+          %th
+      %tbody
+        - @tours.each do |tour|
+          %tr
+            %td{:data => Tour.human_attribute_name(:route)}= tour.route.rname
+            %td{:data => Tour.human_attribute_name(:tdate)}= tour.tdate
+            %td{:data => Tour.human_attribute_name(:days)}= tour.days
+            %td{:data => Tour.human_attribute_name(:tprice)}= tour.trprice
+            %td{:data => Tour.human_attribute_name(:tdesc)}= tour.tdesc
+            %td.right
+              = link_to tour, class: 'btn btn-warning' do
+                = fa_icon :eye
+                = t('buttons.show')
+              - if @current_role_user.try(:is_admin?)
+                = link_to edit_tour_path(tour), class: 'btn btn-info' do
+                  = fa_icon :edit
+                  = t('buttons.edit')
+                = link_to tour, :method => :delete,
+                 :data => { :confirm => t('buttons.confirm.tour') },
+                class: 'btn btn-danger' do
+                  = fa_icon :times
+                  = t('buttons.destroy')
+  %d
+    * Стоимость тура равна стоимости маршрута плюс дополнительные взносы

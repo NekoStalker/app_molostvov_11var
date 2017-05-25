@@ -40,7 +40,11 @@ module SideBarHelper
       {:name => 'Туры',
        :controller => :tours, :action => :index,
        :icon => 'plane',
-       :class => 'long'}
+       :class => 'long'},
+      {:name => 'Поиск туров',
+       :controller => :tours, :action => :search,
+       :icon => 'search',
+       :class => 'long'},
     ]}
     result
   end
